@@ -1,0 +1,20 @@
+import { twCb } from '@/utils/helper';
+
+interface SpinnerProps {
+	size?: 'sm' | 'md' | 'lg';
+}
+
+export const Spinner = (props: SpinnerProps) => {
+	const sizeClass = props.size === 'lg' ? 'h-12 w-12' : props.size === 'sm' ? 'h-5 w-5' : 'h-8 w-8';
+
+	return (
+		<div className="flex items-center justify-center p-8">
+			<div
+				className={twCb(
+					'animate-spin rounded-full border-4 border-gray-200 border-t-blue-600',
+					sizeClass,
+				)}
+			/>
+		</div>
+	);
+};
