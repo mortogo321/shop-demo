@@ -1,6 +1,6 @@
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import type { ProductsResponse } from '@/types/product';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import type { SortOption } from '@/stores/filter-store';
+import type { ProductsResponse } from '@/types/product';
 import { api } from '@/utils/request';
 
 interface ProductsQueryParams {

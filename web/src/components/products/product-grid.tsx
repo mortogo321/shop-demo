@@ -1,8 +1,8 @@
 'use client';
 
+import { CategoryPills } from '@/components/categories/category-pills';
 import { useProductsQuery } from '@/hooks/use-products.query';
 import { useFilterStore } from '@/stores/filter-store';
-import { CategoryPills } from '@/components/categories/category-pills';
 import { Pagination } from './pagination';
 import { ProductCard } from './product-card';
 import { ProductSkeleton } from './product-skeleton';

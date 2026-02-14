@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 import { CartIcon } from '@/components/cart/cart-icon';
 import { useFilterStore } from '@/stores/filter-store';
 
