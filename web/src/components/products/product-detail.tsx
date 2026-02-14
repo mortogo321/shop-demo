@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { Spinner } from '@/components/ui/spinner';
 import { useProductQuery } from '@/hooks/use-product.query';
 import { useCartStore } from '@/stores/cart-store';
-import { formatPrice, showToast } from '@/utils/helper';
+import { formatPrice, showToast, twCb } from '@/utils/helper';
 
 interface ProductDetailProps {
 	productId: number;
@@ -13,6 +14,7 @@ interface ProductDetailProps {
 export const ProductDetail = (props: ProductDetailProps) => {
 	const { data: product, isLoading, isError } = useProductQuery(props.productId);
 	const addItem = useCartStore((s) => s.addItem);
+	const [selectedImage, setSelectedImage] = useState(0);
 
 	if (isLoading) {
 		return <Spinner size="lg" />;
@@ -36,18 +38,90 @@ export const ProductDetail = (props: ProductDetailProps) => {
 		showToast.success(`${product.title} added to cart`);
 	};
 
+	const allImages = product.images.length > 0 ? product.images : [product.thumbnail];
+
+	const handlePrev = () => {
+		setSelectedImage((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+	};
+
+	const handleNext = () => {
+		setSelectedImage((prev) => (prev === allImages.length - 1 ? 0 : prev + 1));
+	};
+
 	return (
 		<div className="p-6">
 			<div className="flex flex-col gap-6 md:flex-row">
-				{/* Image */}
-				<div className="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-50 md:w-1/2">
-					<Image
-						src={product.images[0] ?? product.thumbnail}
-						alt={product.title}
-						fill
-						className="object-cover"
-						sizes="(max-width: 768px) 100vw, 50vw"
-					/>
+				{/* Image Gallery */}
+				<div className="w-full md:w-1/2">
+					{/* Main Image */}
+					<div className="group relative aspect-square w-full overflow-hidden rounded-lg bg-gray-50">
+						<Image
+							src={allImages[selectedImage]}
+							alt={`${product.title} - Image ${selectedImage + 1}`}
+							fill
+							className="object-cover transition-transform duration-300 group-hover:scale-105"
+							sizes="(max-width: 768px) 100vw, 50vw"
+						/>
+
+						{allImages.length > 1 ? (
+							<>
+								{/* Prev / Next arrows */}
+								<button
+									type="button"
+									onClick={handlePrev}
+									className="absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-700 opacity-0 shadow-md backdrop-blur-sm transition-opacity hover:bg-white group-hover:opacity-100"
+									aria-label="Previous image"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+										<path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+									</svg>
+								</button>
+								<button
+									type="button"
+									onClick={handleNext}
+									className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-700 opacity-0 shadow-md backdrop-blur-sm transition-opacity hover:bg-white group-hover:opacity-100"
+									aria-label="Next image"
+								>
+									<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+										<path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+									</svg>
+								</button>
+
+								{/* Image counter */}
+								<span className="absolute bottom-2 right-2 rounded-full bg-black/50 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+									{selectedImage + 1} / {allImages.length}
+								</span>
+							</>
+						) : null}
+					</div>
+
+					{/* Thumbnail strip */}
+					{allImages.length > 1 ? (
+						<div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+							{allImages.map((img, idx) => (
+								<button
+									key={img}
+									type="button"
+									onClick={() => setSelectedImage(idx)}
+									className={twCb(
+										'relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 transition-all',
+										selectedImage === idx
+											? 'border-blue-500 ring-2 ring-blue-500/20'
+											: 'border-gray-200 opacity-60 hover:opacity-100',
+									)}
+									aria-label={`View image ${idx + 1}`}
+								>
+									<Image
+										src={img}
+										alt={`${product.title} thumbnail ${idx + 1}`}
+										fill
+										className="object-cover"
+										sizes="64px"
+									/>
+								</button>
+							))}
+						</div>
+					) : null}
 				</div>
 
 				{/* Info */}

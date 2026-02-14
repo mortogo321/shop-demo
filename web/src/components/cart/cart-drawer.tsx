@@ -43,7 +43,7 @@ export const CartDrawer = () => {
 	}, [isOpen]);
 
 	return (
-		<>
+		<div className="lg:hidden">
 			{/* Backdrop */}
 			<div
 				role="presentation"
@@ -140,6 +140,6 @@ export const CartDrawer = () => {
 					</div>
 				) : null}
 			</div>
-		</>
+		</div>
 	);
 };

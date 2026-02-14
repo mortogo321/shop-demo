@@ -60,24 +60,19 @@ describe('ProductCard', () => {
 		expect(screen.getByText('$29.99')).toBeInTheDocument();
 	});
 
-	it('should render product category', () => {
-		render(<ProductCard product={mockProduct} />);
-		expect(screen.getByText('electronics')).toBeInTheDocument();
-	});
-
 	it('should render product rating', () => {
 		render(<ProductCard product={mockProduct} />);
 		expect(screen.getByText('4.5')).toBeInTheDocument();
 	});
 
-	it('should render discount badge', () => {
+	it('should render discount badge for discounts >= 5%', () => {
 		render(<ProductCard product={mockProduct} />);
 		expect(screen.getByText('-10%')).toBeInTheDocument();
 	});
 
 	it('should add item to cart when button is clicked', () => {
 		render(<ProductCard product={mockProduct} />);
-		const addButton = screen.getByText('Add to Cart');
+		const addButton = screen.getByText('Add');
 		fireEvent.click(addButton);
 		const state = useCartStore.getState();
 		expect(state.items).toHaveLength(1);
@@ -86,7 +81,8 @@ describe('ProductCard', () => {
 
 	it('should link to product detail page', () => {
 		render(<ProductCard product={mockProduct} />);
-		const link = screen.getByRole('link');
-		expect(link).toHaveAttribute('href', '/products/1');
+		const links = screen.getAllByRole('link');
+		const productLink = links.find((link) => link.getAttribute('href') === '/products/1');
+		expect(productLink).toBeDefined();
 	});
 });

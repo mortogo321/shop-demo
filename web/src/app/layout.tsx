@@ -23,7 +23,7 @@ export default function RootLayout(props: RootLayoutProps) {
 			<body className="min-h-screen bg-gray-50 font-sans text-gray-900 antialiased">
 				<QueryProvider>
 					<Header />
-					<main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">{props.children}</main>
+					<main className="mx-auto max-w-[90rem] px-4 py-8 sm:px-6 lg:px-8">{props.children}</main>
 					{props.modal}
 					<CartDrawer />
 					<ToastContainer position="bottom-right" autoClose={3000} />

@@ -11,7 +11,7 @@ export const CartIcon = () => {
 		<button
 			type="button"
 			onClick={toggleCart}
-			className="relative rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100"
+			className="relative rounded-lg p-2 text-gray-700 transition-colors hover:bg-gray-100 lg:hidden"
 			aria-label="Open cart"
 		>
 			<svg
