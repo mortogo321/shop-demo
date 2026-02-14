@@ -162,9 +162,7 @@ export const CategorySidebar = () => {
 					))}
 
 					{isFiltering && filteredCategories.length === 0 ? (
-						<p className="px-3 py-3 text-center text-xs text-gray-400">
-							No categories found
-						</p>
+						<p className="px-3 py-3 text-center text-xs text-gray-400">No categories found</p>
 					) : null}
 
 					{hasMore ? (

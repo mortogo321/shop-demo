@@ -88,9 +88,7 @@ export const ProductCard = (props: ProductCardProps) => {
 						{formatPrice(props.product.price)}
 					</span>
 					{originalPrice ? (
-						<p className="text-xs text-gray-400 line-through">
-							{formatPrice(originalPrice)}
-						</p>
+						<p className="text-xs text-gray-400 line-through">{formatPrice(originalPrice)}</p>
 					) : null}
 				</div>
 				<button

@@ -19,9 +19,7 @@ export const CartSidebar = () => {
 	return (
 		<div className="sticky top-24 rounded-xl border border-gray-100 bg-white shadow-sm">
 			<div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
-				<h2 className="text-xs font-bold uppercase tracking-widest text-gray-900">
-					Order Summary
-				</h2>
+				<h2 className="text-xs font-bold uppercase tracking-widest text-gray-900">Order Summary</h2>
 				{items.length > 0 ? (
 					<span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700">
 						{totalItems()} {totalItems() === 1 ? 'item' : 'items'}

@@ -49,9 +49,7 @@ export const ProductGrid = () => {
 							d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
 						/>
 					</svg>
-					<p className="text-sm font-medium text-red-600">
-						Failed to load products
-					</p>
+					<p className="text-sm font-medium text-red-600">Failed to load products</p>
 					<p className="mt-1 text-xs text-red-500">
 						{error instanceof Error ? error.message : 'Please try again later.'}
 					</p>
@@ -66,13 +64,11 @@ export const ProductGrid = () => {
 						</p>
 					) : null}
 
-					<div className={`space-y-3 transition-opacity duration-200 ${isFetching ? 'opacity-60' : ''}`}>
+					<div
+						className={`space-y-3 transition-opacity duration-200 ${isFetching ? 'opacity-60' : ''}`}
+					>
 						{products.map((product, index) => (
-							<ProductCard
-								key={product.id}
-								product={product}
-								priority={index < 4 && page === 1}
-							/>
+							<ProductCard key={product.id} product={product} priority={index < 4 && page === 1} />
 						))}
 					</div>
 

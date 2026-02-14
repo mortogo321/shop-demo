@@ -30,8 +30,11 @@ export const ProductToolbar = (props: ProductToolbarProps) => {
 	return (
 		<div className="mb-4 flex flex-wrap items-center justify-between gap-3">
 			<p className="text-xs text-gray-400">
-				Showing <span className="font-medium text-gray-600">{start}-{end}</span> of{' '}
-				<span className="font-medium text-gray-600">{props.total}</span> products
+				Showing{' '}
+				<span className="font-medium text-gray-600">
+					{start}-{end}
+				</span>{' '}
+				of <span className="font-medium text-gray-600">{props.total}</span> products
 			</p>
 
 			<div className="flex items-center gap-3">
