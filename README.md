@@ -47,8 +47,8 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Biome over ESLint/Prettier** — Single tool for linting and formatting, faster execution
 - **Parallel + Intercepting Routes** — Product detail opens as a modal on soft navigation, renders as a full page on direct URL access. Browser back closes the modal naturally
 - **Zustand with persist** — Lightweight state management with localStorage persistence for cart data across page refreshes
-- **react-toastify** — Per stickydevs guidelines, used via `showToast` helper from `utils/helper.ts`
-- **No Next.js backend features** — Per guidelines, Next.js is used only for routing and client-side rendering
+- **react-toastify** — Wrapped in a `showToast` helper (`utils/helper.ts`) for consistent toast usage across the app
+- **No Next.js backend features** — Next.js is used only for routing and client-side rendering; all data access goes through the DummyJSON API via TanStack Query
 
 ## CI/CD
 
