@@ -31,8 +31,8 @@ describe('cart store', () => {
 		useCartStore.getState().addItem(mockProduct);
 		const state = useCartStore.getState();
 		expect(state.items).toHaveLength(1);
-		expect(state.items[0].id).toBe(1);
-		expect(state.items[0].quantity).toBe(1);
+		expect(state.items[0]?.id).toBe(1);
+		expect(state.items[0]?.quantity).toBe(1);
 	});
 
 	it('should increase quantity when adding the same item', () => {
@@ -40,7 +40,7 @@ describe('cart store', () => {
 		useCartStore.getState().addItem(mockProduct);
 		const state = useCartStore.getState();
 		expect(state.items).toHaveLength(1);
-		expect(state.items[0].quantity).toBe(2);
+		expect(state.items[0]?.quantity).toBe(2);
 	});
 
 	it('should remove an item from the cart', () => {
@@ -49,14 +49,14 @@ describe('cart store', () => {
 		useCartStore.getState().removeItem(1);
 		const state = useCartStore.getState();
 		expect(state.items).toHaveLength(1);
-		expect(state.items[0].id).toBe(2);
+		expect(state.items[0]?.id).toBe(2);
 	});
 
 	it('should increase quantity of a specific item', () => {
 		useCartStore.getState().addItem(mockProduct);
 		useCartStore.getState().increaseQty(1);
 		const state = useCartStore.getState();
-		expect(state.items[0].quantity).toBe(2);
+		expect(state.items[0]?.quantity).toBe(2);
 	});
 
 	it('should decrease quantity of a specific item', () => {
@@ -64,7 +64,7 @@ describe('cart store', () => {
 		useCartStore.getState().addItem(mockProduct);
 		useCartStore.getState().decreaseQty(1);
 		const state = useCartStore.getState();
-		expect(state.items[0].quantity).toBe(1);
+		expect(state.items[0]?.quantity).toBe(1);
 	});
 
 	it('should remove item when quantity decreases below 1', () => {

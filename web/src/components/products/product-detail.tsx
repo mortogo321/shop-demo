@@ -39,6 +39,7 @@ export const ProductDetail = (props: ProductDetailProps) => {
 	};
 
 	const allImages = product.images.length > 0 ? product.images : [product.thumbnail];
+	const currentImage = allImages[selectedImage] ?? product.thumbnail;
 
 	const handlePrev = () => {
 		setSelectedImage((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
@@ -56,7 +57,7 @@ export const ProductDetail = (props: ProductDetailProps) => {
 					{/* Main Image */}
 					<div className="group relative aspect-square w-full overflow-hidden rounded-lg bg-gray-50">
 						<Image
-							src={allImages[selectedImage]}
+							src={currentImage}
 							alt={`${product.title} - Image ${selectedImage + 1}`}
 							fill
 							className="object-cover transition-transform duration-300 group-hover:scale-105"

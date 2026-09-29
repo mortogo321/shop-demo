@@ -76,7 +76,7 @@ describe('ProductCard', () => {
 		fireEvent.click(addButton);
 		const state = useCartStore.getState();
 		expect(state.items).toHaveLength(1);
-		expect(state.items[0].id).toBe(1);
+		expect(state.items[0]?.id).toBe(1);
 	});
 
 	it('should link to product detail page', () => {

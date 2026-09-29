@@ -6,15 +6,15 @@ Data is powered by the [DummyJSON Products API](https://dummyjson.com/docs/produ
 
 ## Tech Stack
 
-- **Framework** - Next.js 16 (App Router, Turbopack)
-- **Language** - TypeScript
+- **Framework** - Next.js 16 (App Router, Turbopack, standalone output)
+- **Language** - TypeScript 5.9 (strict + `noUncheckedIndexedAccess`)
 - **Styling** - Tailwind CSS v4
 - **State Management** - Zustand
 - **Data Fetching** - TanStack Query v5
 - **HTTP Client** - Axios
 - **Linting** - Biome
 - **Testing** - Vitest + React Testing Library
-- **Runtime** - Bun
+- **Runtime** - Bun 1.4 (package manager) / Node 26 (production runtime)
 
 ## Features
 
@@ -58,7 +58,7 @@ Data is powered by the [DummyJSON Products API](https://dummyjson.com/docs/produ
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) (v1.0+)
+- [Bun](https://bun.sh/) (v1.4.2)
 
 ### Install & Run
 
@@ -79,11 +79,19 @@ bun run dev
 | `bun run dev` | Start development server with Turbopack |
 | `bun run build` | Create production build |
 | `bun run start` | Start production server |
-| `bun run lint` | Run Biome linter |
+| `bun run lint` | Run Biome check (lint + format) |
 | `bun run format` | Format code with Biome |
 | `bun run check` | Lint + format (auto-fix) |
+| `bun run typecheck` | Typecheck with `tsc --noEmit` |
 | `bun run test` | Run tests with Vitest |
 | `bun run test:watch` | Run tests in watch mode |
+| `bun run quality` | lint + typecheck + test |
+
+### Notes
+
+- `output: "standalone"` in `next.config.ts` — the Docker runtime image serves `.next/standalone/server.js` as non-root on Node 26.
+- `GET /api/health` returns `{ "status": "ok" }` — used by the Dockerfile `HEALTHCHECK` and Compose healthchecks.
+- TypeScript is pinned to `~5.9.3` (matches the other Next.js 16 modernizations; Next 16 + TS 7 has no verified build story yet).
 
 ## Project Structure
 
